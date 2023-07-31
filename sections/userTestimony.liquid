@@ -1,0 +1,55 @@
+<div class="heading">
+  <p>{{section.settings.heading}}</p>
+</div>
+<div class="outer-imgs">
+{% for block in section.blocks %}
+<div class="imgs">
+
+  <img src="{{block.settings.testimony-image | img_url:"large"}}"/>
+  <p>{{ block.settings.testimony_text }}</p>
+
+</div>
+  {% endfor %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "Section name",
+    "settings": [{
+      "type":"text",
+      "id":"heading",
+      "label":"Heading"
+    }],
+    "blocks":[{
+      "type":"image",
+      "name":"testimony",
+      "settings":[
+        {
+          "type":"image_picker",
+          "id":"testimony-image",
+          "label":"Enter image"
+        },
+        {
+        "type":"text",
+        "id":"testimony_text",
+        "label":"testimony Text"
+      }]
+    }],
+    "presets":[{
+      "name":"user-testimony"    }]
+  }
+{% endschema %}
+
+
+{% style %}
+.heading{
+  text-align:center;
+}
+.outer-imgs{
+  display:flex;
+}
+  
+{% endstyle %}
+
+
