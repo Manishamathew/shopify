@@ -1,0 +1,62 @@
+<div class="container">
+  <p>{{ section.settings.section-heading }}</p>
+  <img src ="{{ section.settings.section-image | img_url:'large' }}"/>
+  <a href="{{ section.settings.link}}">
+    <button>{{ section.settings.button }}</button>
+  </a>
+  <a href="{{ section.settings.url}}"></a>
+</div>
+
+
+{% schema %}
+    {
+      "name": "Section name",
+      "settings": [{
+      "id":"section-heading",
+      "type":"text",
+      "label":"Heading1",
+      "default":"Enter  heading"
+    },
+  {
+      "id":"section-image",
+      "type":"image_picker",
+      "label":"Enter Image"
+  },
+  
+      {
+      "id":"button",
+      "type":"text",
+      "label":"Enter button text",
+      "default":"Enter button text"
+
+  },
+   {
+      "id":"link",
+      "type":"url",
+      "label":"Enter Link"
+  
+  }],
+  "presets":[
+    {
+      "name":"Image"
+    }
+  ]
+  }
+  
+{% endschema %}
+
+{% style %}
+  .container p{
+    text-align:center;
+  }
+ .container img{
+   text-align:center;
+   width:100%;
+ }
+  .container button{
+    text-align:center;
+  }
+{% endstyle %}
+
+
+

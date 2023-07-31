@@ -1,0 +1,32 @@
+<div class="dusk">
+  <h1>{{ product.title }}</h1>
+  {% for images in product.images %}
+    <img src=" {{ images | img_url:"large" }} " />
+  {% endfor %}
+    <div class="container">
+  <p>{{ product.vendor }}</p>
+  <p>product type:{{ product.type}}</p>
+  <p>price: {{ product.price }}</p>
+  </div>
+</div>
+
+{% style %}
+  .dusk{
+    display:flex;
+    flex-direction:column;
+  }
+  .dusk img{
+    width:20%;
+  }
+  .
+  /* .dusk p{
+    text-align:center;
+  }
+  .container{
+    position:absolute;
+    right:340px;
+
+  } */
+
+
+{% endstyle %}
