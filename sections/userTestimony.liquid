@@ -4,8 +4,7 @@
 <div class="outer-imgs">
 {% for block in section.blocks %}
 <div class="imgs">
-
-  <img src="{{block.settings.testimony-image | img_url:"large"}}"/>
+  <img src="{{block.settings.testimony-image | img_url:"large"}}"class="test"/>
   <p>{{ block.settings.testimony_text }}</p>
 
 </div>
@@ -48,8 +47,41 @@
 }
 .outer-imgs{
   display:flex;
+  justify-content: space-around;
+ 
 }
-  
+.imgs{
+  max-width:30%;
+  margin:25px;
+  border:1px white;
+  box-shadow:10px 5px 5px black;
+  text-align: center;
+
+}
+.test{
+max-width:250px;
+
+}
+
+@media(max-width:1400px){
+  .outer-imgs{
+    flex-wrap:wrap;
+    align-items:center;
+  }
+}
+@media(max-width:1198px){ 
+  .imgs{
+    max-width:50%;
+  }
+}
+
+@media(max-width:886px){ 
+  .imgs{
+    max-width:70%;
+  }
+}
 {% endstyle %}
+
+
 
 
