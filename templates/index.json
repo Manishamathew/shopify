@@ -94,8 +94,12 @@
     },
     "e6d39b0b-ec51-4d19-a54e-038186ce44cc": {
       "type": "image",
+      "custom_css": [
+        "img {width: 200px;}"
+      ],
       "settings": {
         "section-heading": "Enter  heading",
+        "section-image": "shopify:\/\/shop_images\/clf62q1dd0020mg08k13ynq21_1.jpg",
         "button": "Enter",
         "link": "shopify:\/\/collections\/cleanser"
       }
