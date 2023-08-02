@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js" defer="defer"></script>
 
 <label for="region">Choose a region:</label>
-<select name="regions" id="regions" onchange="country()">
+<select name="attributes[regions]" id="regions" onchange="country()" required>
   <option value="Dubai">Dubai</option>
   <option value="Abu Dhabi">Abu Dhabi</option>
   <option value="Sharjah">Sharjah</option>
@@ -11,8 +11,7 @@
 <div style="width:300px; clear:both;">
   <p>
     <label for="date">Pick a delivery date:</label>
-    <input id="date" type="text" name="attributes[date]" value="{{ cart.attributes.date }}" />
-    <span style="display:block" class="instructions"> We do not deliver during the week-end.</span>
+    <input id="date" type="text" name="attributes[date]" value="{{ cart.attributes.date }}" required/>
   </p>
 </div>
 
@@ -20,33 +19,88 @@
   function country() {
     var count = document.getElementById("regions");
     var result = count.value;
-
-    const currentdate = new Date();
-    let hour = currentdate.getHours();
-    let min = currentdate.getMinutes();
-
+    setCookie("regions",result,1);
+    document.getElementById("date").value='';
+    const new_date = new Date();
+    let hour = new_date.getHours();
+    let min = new_date.getMinutes();
+   
     if (result === 'Dubai') {
       if (hour < 13 || (hour === 13 && min < 30)) {
-        $('#date').datepicker('option', 'minDate', 0);
+        $('#date').datepicker('option', 'minDate', 0)
+
       } else {
-        $('#date').datepicker('option', 'minDate', 1);
+        $('#date').datepicker('option', 'minDate', 1)
+
       }
     } else {
       $('#date').datepicker('option', 'minDate', 1);
+
+    }
+
+  }
+  function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
     }
   }
+  return "";
+}
+function chosenRegion() {
+  let region_field = document.getElementById("regions");
+  let region_cookie = getCookie("regions");
+  if (region_cookie) {
+    region_field.value = region_cookie;
+  } 
+}
+function chosenDate() {
+  let date_field = document.getElementById("date");
+  let cookie_date = getCookie("date");
 
-  window.onload = function () {
+  if (cookie_date) {
+      date_field.value = cookie_date;
+  } 
+}
+
+
+  window.onload = function() {
     if (window.jQuery) {
       let $ = window.jQuery;
-
-      $(function () {
+      $(function() {
         $("#date").datepicker({
           minDate: +1,
           maxDate: '+2M',
-          beforeShowDay: $.datepicker.noWeekends
+          onSelect: function(chosendate) {
+            setCookie('date',chosendate, 1);
+          }
         });
-      });
+        chosenDate();
+        chosenRegion();
+      });    
     }
   }
+  
+ 
 </script>
+
+
+
+
+
+
