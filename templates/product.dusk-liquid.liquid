@@ -3,7 +3,7 @@
   {% for images in product.images %}
     <img src=" {{ images | img_url:"large" }} " />
   {% endfor %}
-    <div class="container">
+  <div class="container">
   <p>{{ product.vendor }}</p>
   <p>product type:{{ product.type}}</p>
   <p>price: {{ product.price }}</p>
